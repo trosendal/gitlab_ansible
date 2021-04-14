@@ -25,10 +25,18 @@
       name: gitlab/gitlab-ce
       tag: latest
 
-## Set an environment variable to define location of gitlab config
-## files, logs and the database files.
+## Set an environment variable to define location of gitlabg
   - name: set GITLAB_HOME
     become: false
     command: >-
       bash -c "export GITLAB_HOME=/srv/gitlab"
+
+## Create the directory to contain the logs, database and config
+  - name: create directoriy
+    file:
+      path: $GITLAB_HOME
+      state: directory
+      mode: '0755'
+      owner: root
+      group: root
 
