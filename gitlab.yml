@@ -1,0 +1,20 @@
+---
+- name: Configure a gitlab server
+  hosts: workstation
+  become: yes
+  tasks:
+
+## Install some dependancies
+  - name: Ensure some software we need is installed
+    dnf:
+      name:
+        - podman
+      state: latest
+
+  - name: Create a user to run the instance of gitlab
+     user:
+      name: gitlab_user
+      password: '$6$9wPJ0z27n89oHMS0$KacO/4JlFcIJUeq5Up4lMvvQmxQzUOyEGoD4HUCgeUsuYdSlWifjV5PxH5XKmEYVsWTmCPD3IHPpFt/nqHVXz.'
+      state: present
+      system: yes
+      createhome: no
