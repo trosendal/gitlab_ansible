@@ -12,9 +12,16 @@
       state: latest
 
   - name: Create a user to run the instance of gitlab
-     user:
+    user:
       name: gitlab_user
       password: '$6$9wPJ0z27n89oHMS0$KacO/4JlFcIJUeq5Up4lMvvQmxQzUOyEGoD4HUCgeUsuYdSlWifjV5PxH5XKmEYVsWTmCPD3IHPpFt/nqHVXz.'
       state: present
       system: yes
       createhome: no
+
+## Pull the gitlab community edition container.
+  - name: Pull latest gitlab-ce
+    containers.podman.podman_image:
+      name: gitlab/gitlab-ce
+      tag: latest
+

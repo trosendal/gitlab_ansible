@@ -1,8 +1,9 @@
-## Install a gitlab instance in a podman
+###################################################################
+##
+## Install a gitlab instance in a container and run it with podman
 ##
 ###################################################################
 ## Run the playbook
-##
 ###################################################################
 all: dependancies
 	ansible-playbook gitlab.yml -K
