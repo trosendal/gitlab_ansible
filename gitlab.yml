@@ -25,3 +25,10 @@
       name: gitlab/gitlab-ce
       tag: latest
 
+## Set an environment variable to define location of gitlab config
+## files, logs and the database files.
+  - name: set GITLAB_HOME
+    become: false
+    command: >-
+      bash -c "export GITLAB_HOME=/srv/gitlab"
+
