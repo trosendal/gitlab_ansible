@@ -2,6 +2,8 @@
 - name: Configure a gitlab server
   hosts: workstation
   become: yes
+  vars:
+    GITLAB_HOME: /srv/gitlab
   tasks:
 
 ## Install some dependancies
@@ -29,16 +31,18 @@
   - name: set GITLAB_HOME
     become: false
     command: >-
-      bash -c "export GITLAB_HOME=/srv/gitlab"
-    environment:
-      GITLAB_HOME: /srv/gitlab
+      bash -c "export GITLAB_HOME={{ GITLAB_HOME }}"
 
 ## Create the directory to contain the logs, database and config
   - name: create directoriy
     file:
-      path: $GITLAB_HOME
+      path: "{{ item }}"
       state: directory
       mode: '0755'
       owner: gitlab_user
       group: gitlab_user
+    loop:
+      - "{{ GITLAB_HOME }}/config"
+      - "{{ GITLAB_HOME }}/logs"
+      - "{{ GITLAB_HOME }}/data"
 
