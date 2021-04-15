@@ -30,6 +30,8 @@
     become: false
     command: >-
       bash -c "export GITLAB_HOME=/srv/gitlab"
+    environment:
+      GITLAB_HOME: /srv/gitlab
 
 ## Create the directory to contain the logs, database and config
   - name: create directoriy
@@ -37,6 +39,6 @@
       path: $GITLAB_HOME
       state: directory
       mode: '0755'
-      owner: root
-      group: root
+      owner: gitlab_user
+      group: gitlab_user
 
